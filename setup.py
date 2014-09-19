@@ -20,11 +20,11 @@ icu_path = os.path.join(v8_path, 'third_party', 'icu')
 boost_fname = os.path.join(s, 'boost_1_55_0.tar.bz2')
 boost_url = 'http://heanet.dl.sourceforge.net/project/boost/boost/1.55.0/boost_1_55_0.tar.bz2'
 
-if not os.path.exists(os.path.join(v8_path, 'build/gyp/gyp')):
-	os_system('(mkdir -p %(p)s && cd %(p)s && (svn upgrade || true)) && svn checkout --force http://pyv8.googlecode.com/svn/trunk                           %(p)s --revision 531   ' % {'p': pyv8_path})
-	os_system('(mkdir -p %(p)s && cd %(p)s && (svn upgrade || true)) && svn checkout --force http://v8.googlecode.com/svn/trunk                             %(p)s --revision 16470 ' % {'p': v8_path})
-	os_system('(mkdir -p %(p)s && cd %(p)s && (svn upgrade || true)) && svn checkout --force http://gyp.googlecode.com/svn/trunk                            %(p)s --revision 1685  ' % {'p': gyp_path})
-	os_system('(mkdir -p %(p)s && cd %(p)s && (svn upgrade || true)) && svn checkout --force https://src.chromium.org/chrome/trunk/deps/third_party/icu46   %(p)s --revision 214189' % {'p': icu_path})
+if True or not os.path.exists(os.path.join(v8_path, 'build/gyp/gyp')):
+	os_system('(mkdir -p %(p)s && cd %(p)s && (svn upgrade || true)) && svn checkout --force http://pyv8.googlecode.com/svn/trunk                           %(p)s --revision 586   ' % {'p': pyv8_path})
+	os_system('(mkdir -p %(p)s && cd %(p)s && (svn upgrade || true)) && svn checkout --force http://v8.googlecode.com/svn/trunk                             %(p)s --revision 19632 ' % {'p': v8_path})
+	os_system('(mkdir -p %(p)s && cd %(p)s && (svn upgrade || true)) && svn checkout --force http://gyp.googlecode.com/svn/trunk                            %(p)s --revision 1977  ' % {'p': gyp_path})
+	os_system('(mkdir -p %(p)s && cd %(p)s && (svn upgrade || true)) && svn checkout --force https://src.chromium.org/chrome/trunk/deps/third_party/icu46   %(p)s --revision 292033' % {'p': icu_path})
 
 try:
 	os_system('chmod +x %s' % (os.path.join(v8_path, 'build/gyp/gyp'),))
@@ -73,7 +73,7 @@ def get_boost():
 
 	print 'done'
 
-get_boost()
+# get_boost()
 
 if sys.argv != ['setup.py', 'egg_info']:
 	os_system('(cd %s; tar jxf boost_1_55_0.tar.bz2; cd boost_1_55_0; ./bootstrap.sh --with-python-root=%s; ./b2 -a cxxflags=-fPIC -j8 -q --build-type=minimal --with-system --with-python --with-thread variant=release link=static runtime-link=static)' % (s, sys.prefix,))
